@@ -90,7 +90,7 @@
           </a-gltf-model>
         
         <a-gltf-model
-          id="Crist"
+          id="Datos"
           class="crist"
           position="0 0 0"
           scale="1 1 1"
@@ -102,6 +102,44 @@
       <a-entity id="camera" camera sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;></a-entity>
      <a-light light="color: #bdbcbd; type: point; intensity: 0.5; decay: 0" position="1.64 2.39 0"></a-light>
       <a-light light="color: #b7b3d0; intensity: 0.7; decay: 0.37; shadowBias: 0.01; shadowCameraBottom: -3.25" position="-0.75 -0.47 -0.1"></a-light>
-    </a-scene>
+     </a-scene>
+    
+    <script>
+
+      
+      document.getElementById("btn2").addEventListener("click", e => {
+        var el = document.querySelector("#Crist");
+        var entityEl = document.createElement(entityEl);
+        el.setAttribute("visible", true);
+        el.setAttribute("scale", "0.5 0.5 0.5");
+        entityEl.parentNode.addChild(entityEl);
+       
+      })
+        
+       document.getElementById("btn2").addEventListener("click", e => {
+        var el = document.querySelector("#Datos");
+        el.setAttribute("visible", false);
+        el.setAttribute("scale", "0.5 0.5 0.5");
+        el.parentNode.removeChild("el");
+        
+      })
+      
+       document.getElementById("btn3").addEventListener("click", e => {
+        var el = document.querySelector("#Crist");
+        var entityEl = document.createElement(entityEl); 
+        el.setAttribute("visible", true);
+        el.setAttribute("scale", "0.5 0.5 0.5");
+        entityEl.parentNode.addChild(entityEl); 
+        
+      })
+        
+       document.getElementById("btn3").addEventListener("click", e => {
+        var el = document.querySelector("#Datos");
+        var entityEl = document.createElement(entityEl);  
+        el.setAttribute("visible", true);
+        el.setAttribute("scale", "0.5 0.5 0.5");
+        entityEl.parentNode.addChild(entityEl); 
+      })
+    </script>
   </body>
 </html>
