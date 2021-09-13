@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <style>
+         .button {
+           background-color: #CD6155;
+        opacity:1
+           border: none;
+           color: white;
+           padding: 6px;
+           text-align: center;
+           text-decoration: none;
+           display: inline-block;
+           font-size: 10px;
+           margin: 8px 8px;
+           cursor: pointer;
+           border-radius: 7px;
+           border: 0px solid rgba(9, 148, 28, 0.541);
+           box-shadow: 0 0px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
+
+         }
+
+         .button:hover{
+        opacity:0.6;
+      }
+
+         .wrap {
+         border: solid 1px #ccc;
+         padding: 20px;
+         text-align: center;
+       }
+
+       #output {
+         display: inline-block;
+         top: 4px;
+         position: relative;
+         border: dotted 1px #ccc;
+         padding: 2px;
+       }
+
+       .button {
+         border: solid 0px #ccc;
+       }
+    </style>
+
+    <div
+      style="position: fixed; bottom: 20px; width:100%; text-align: center; z-index: 1;"
+    >
+      <button class="button" id="btn2">ocultar info</button>
+      <button class="button" id="btn3">mostrar info</button>
+    </div>
+
+</head>
+  <body onload="init();" style="margin : 0px; overflow: hidden;">
+    <a-scene
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+      vr-mode-ui="enabled: false;"
+      shadow="type: pcfsoft; autoUpdate: true;"
+      renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true;"
+    >
+      <!-- Assets -->>
+      <a-assets>
+        <a-asset-item
+          id="LeonCortes"
+          gltf-model
+          src="assets/LeonCortesOptim.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="FichaTecnica"
+          gltf-model
+          src="assets/Ficha_Tecnica.glb"
+        ></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0">
+        <a-marker preset="hiro">
+          <a-entity
+            position="0 0 0">
+          <a-entity
+            id="Leon"
+            gltf-model="#LeonCortes"
+            scale="0.5 0.5 0.5"
+            position="0 0 0"
+            rotation="0 -90 0"
+            visible="true"
+            shadow="cast: true">    
+          </a-entity>
+          
+          <a-entity
+            id="FichaT"
+            gltf-model="#FichaTecnica"
+            scale="0.5 0.5 0.5"
+            position="0 0 0"
+            rotation="0 -90 0"
+            visible="false"
+            shadow="cast: false"
+          ></a-entity>
+          <a-entity
+          id="light1"
+          position="4.076245307922363 2.903861999511719 0"
+          light="castShadow:true; color:#ffffff; distance:40.0; type:point; intensity:6.0; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2;"
+        ></a-entity>
+          <a-entity
+          id="light2"
+          position="-6.3098464012146 1.8208726644515991 0"
+          light="castShadow:true; color:#ffffff; distance:40.0; type:point; intensity:3.0; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2;"
+         ></a-entity>
+         </a-entity>
+        </a-marker>
+      </a-camera>
+    </a-scene>
+
+    <script>
+
+      
+      document.getElementById("btn2").addEventListener("click", e => {
+        var el = document.querySelector("#Leon");
+        var entityEl = document.createElement(entityEl);
+        el.setAttribute("visible", true);
+        el.setAttribute("scale", "0.5 0.5 0.5");
+        entityEl.parentNode.addChild(entityEl);
+       
+      })
+        
+       document.getElementById("btn2").addEventListener("click", e => {
+        var el = document.querySelector("#FichaT");
+        el.setAttribute("visible", false);
+        el.setAttribute("scale", "0.5 0.5 0.5");
+        el.parentNode.removeChild("el");
+        
+      })
+      
+       document.getElementById("btn3").addEventListener("click", e => {
+        var el = document.querySelector("#Leon");
+        var entityEl = document.createElement(entityEl); 
+        el.setAttribute("visible", true);
+        el.setAttribute("scale", "0.5 0.5 0.5");
+        entityEl.parentNode.addChild(entityEl); 
+        
+      })
+        
+       document.getElementById("btn3").addEventListener("click", e => {
+        var el = document.querySelector("#FichaT");
+        var entityEl = document.createElement(entityEl);  
+        el.setAttribute("visible", true);
+        el.setAttribute("scale", "0.5 0.5 0.5");
+        entityEl.parentNode.addChild(entityEl); 
+      })
+    </script>
+  </body>
+</html>
