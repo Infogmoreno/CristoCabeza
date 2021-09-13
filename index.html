@@ -1,153 +1,117 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
-    <style>
-         .button {
-           background-color: #CD6155;
-        opacity:1
-           border: none;
-           color: white;
-           padding: 6px;
-           text-align: center;
-           text-decoration: none;
-           display: inline-block;
-           font-size: 10px;
-           margin: 8px 8px;
-           cursor: pointer;
-           border-radius: 7px;
-           border: 0px solid rgba(9, 148, 28, 0.541);
-           box-shadow: 0 0px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
-
-         }
-
-         .button:hover{
-        opacity:0.6;
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <!-- we import arjs version without NFT but with marker + location based support -->
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+  <script src="https://unpkg.com/aframe-particle-system-component@1.0.9/dist/aframe-particle-system-component.min.js"></script>
+  <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+  
+  <style>
+   #bot_Separar{
+    background-color: #3FB2D7;
+      opacity:1	
+      border: none;
+      color: white;
+      padding: 6px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      font-family:Arial;
+      margin: 6px 8px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 0px solid rgba(9, 148, 28, 0.541);
       }
-
-         .wrap {
-         border: solid 1px #ccc;
-         padding: 20px;
-         text-align: center;
-       }
-
-       #output {
-         display: inline-block;
-         top: 4px;
-         position: relative;
-         border: dotted 1px #ccc;
-         padding: 2px;
-       }
-
-       .button {
-         border: solid 0px #ccc;
-       }
-    </style>
-
-    <div
-      style="position: fixed; bottom: 20px; width:100%; text-align: center; z-index: 1;"
-    >
-      <button class="button" id="btn2">ocultar info</button>
-      <button class="button" id="btn3">mostrar info</button>
-    </div>
-
-</head>
-  <body onload="init();" style="margin : 0px; overflow: hidden;">
+    .button:hover{
+    opacity: 0.5;
+    }
+     #bot_Juntar{
+    background-color: #3FB2D7;
+      opacity:1	
+      border: none;
+      color: white;
+      padding: 6px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      font-family:Arial;
+      margin: 6px 8px;
+      cursor: pointer;
+      border-radius: 6px;
+      border: 0px solid rgba(9, 148, 28, 0.541);
+      
+    }
+    #bot_Separar:hover{
+    opacity: 0.5;
+    }
+     #bot_Juntar:hover{
+    opacity: 0.5;
+    }
+  </style>
+  <body style="margin : 0px; overflow: hidden;">
     <a-scene
       embedded
-      arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-      vr-mode-ui="enabled: false;"
-      shadow="type: pcfsoft; autoUpdate: true;"
-      renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true;"
+      arjs
+      renderer="physicallyCorrectLights: true"
+      cursor="rayOrigin: mouse"
     >
-      <!-- Assets -->>
       <a-assets>
         <a-asset-item
-          id="Cristo"
-          gltf-model
-          src="assets/CabezaCristo.glb"
-        ></a-asset-item>
-       <!-- <a-asset-item
-          id="FichaTecnica"
-          gltf-model
-          src="assets/Ficha_Tecnica.glb"
-        ></a-asset-item>
-      </a-assets> -->>
+          id="volcan"
+          src="assets/Volcan.glb"
+        >
+        </a-asset-item>
+      </a-assets>
 
-      <a-camera position="0 0 0">
-        <a-marker preset="hiro">
-          <a-entity
-            position="0 0 0">
-          <a-entity
-            id="Leon"
-            gltf-model="#Cristo"
-            scale="0.5 0.5 0.5"
-            position="0 0 0"
-            rotation="0 -90 0"
-            visible="true"
-            shadow="cast: true">    
-          </a-entity>
-          
-          <!--<a-entity
-            id="FichaT"
-            gltf-model="#FichaTecnica"
-            scale="0.5 0.5 0.5"
-            position="0 0 0"
-            rotation="0 -90 0"
-            visible="false"
-            shadow="cast: false"
-          ></a-entity>-->>
-          <a-entity
-          id="light1"
-          position="4.076245307922363 2.903861999511719 0"
-          light="castShadow:true; color:#ffffff; distance:40.0; type:point; intensity:6.0; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2;"
+      <a-marker preset="hiro" position="0 0 0" rotation="" scale="1 1 1">
+        <a-entity raycaster="objects: .volcano" cursor></a-entity>
+
+        <a-gltf-model
+          id="volcano"
+          class="volcano"
+          position="0 0 0"
+          scale="0.6 0.6 0.6"
+          rotation="0 -90 0"
+          gltf-model="#volcan"
+          animation-mixer="clip: cerrado"
+          begin="click">
+        </a-gltf-model>
+        
+
+        <a-entity
+          position="0.04 0.6 0"
+          scale="0.04 0.05 0.04"
+          particle-system="positionSpread:0 10 0; color:#F5600B, #F9DF23; duration:NaN; size:0.05; particleCount:10000; opacity:0.4; blending:2; randomise:true; maxAge:1.5"
         ></a-entity>
-          <a-entity
-          id="light2"
-          position="-6.3098464012146 1.8208726644515991 0"
-          light="castShadow:true; color:#ffffff; distance:40.0; type:point; intensity:3.0; shadowBias: -0.001; shadowCameraFar: 501.02; shadowCameraBottom: 12; shadowCameraFov: 101.79; shadowCameraNear: 0; shadowCameraTop: -5; shadowCameraRight: 10; shadowCameraLeft: -10; shadowRadius: 2;"
-         ></a-entity>
-         </a-entity>
-        </a-marker>
-      </a-camera>
+        <a-text
+         text="value: JoseMaria Moreno_2021;"
+         width= "0.5" 
+         position= "0.959 -0.131 0.246">
+        </a-text>
+        
+      </a-marker>
+      <a-entity id="camera" camera sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;></a-entity>
+      <div id=botones style='position: fixed; bottom: 20px; width:100%; text-align: center; z-index: 1;'>
+        <div id="bot_Separar" class="button">Ver interior</div>
+        <div id="bot_Juntar"  class="button">Cerrar</div>
+      </div>
     </a-scene>
-
-    <script>
-
+    <script type="text/javascript">
+        let button = document.querySelector("#bot_Separar");
+        let button2 = document.querySelector("#bot_Juntar");
+        let player = document.querySelector("#volcano");
       
-      document.getElementById("btn2").addEventListener("click", e => {
-        var el = document.querySelector("#Cristo");
-        var entityEl = document.createElement(entityEl);
-        el.setAttribute("visible", true);
-        el.setAttribute("scale", "0.5 0.5 0.5");
-        entityEl.parentNode.addChild(entityEl);
-       
-      })
-        
-       document.getElementById("btn2").addEventListener("click", e => {
-        var el = document.querySelector("#FichaT");
-        el.setAttribute("visible", false);
-        el.setAttribute("scale", "0.5 0.5 0.5");
-        el.parentNode.removeChild("el");
-        
-      })
+        button.addEventListener('click',function(){
+            player.setAttribute('animation-mixer','clip: Separar; loop:once;');
+           });
       
-       document.getElementById("btn3").addEventListener("click", e => {
-        var el = document.querySelector("#Cristo");
-        var entityEl = document.createElement(entityEl); 
-        el.setAttribute("visible", true);
-        el.setAttribute("scale", "0.5 0.5 0.5");
-        entityEl.parentNode.addChild(entityEl); 
-        
-      })
-        
-       document.getElementById("btn3").addEventListener("click", e => {
-        var el = document.querySelector("#FichaT");
-        var entityEl = document.createElement(entityEl);  
-        el.setAttribute("visible", true);
-        el.setAttribute("scale", "0.5 0.5 0.5");
-        entityEl.parentNode.addChild(entityEl); 
-      })
+        button2.addEventListener('click',function(){
+            player.setAttribute('animation-mixer','clip: Juntar; loop:once');
+           });
     </script>
   </body>
 </html>
